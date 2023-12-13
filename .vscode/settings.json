@@ -3,6 +3,6 @@
         "node_modules/": true,
         ".angular/": true,
         "package-lock.json": true,
-        ".gitignore": false
+        ".gitignore": true
     }
 }

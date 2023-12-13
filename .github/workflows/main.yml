@@ -16,7 +16,7 @@ jobs:
       - name: Install NPM dependencies
         run: npm install 
       - name: Run NPM task (like build)
-        run: npm run build 
+        run: npm run github_build 
       - name: Make Github commit
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
