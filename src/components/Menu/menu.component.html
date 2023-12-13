@@ -1,0 +1,8 @@
+<nav class="col-12">
+    <a *ngFor="let link of menu" routerLink="{{ link.path }}" ariaCurrentWhenActive="page">
+        <i class="material-symbols-outlined">apps</i>
+        <span>{{ link.title }}</span>
+    </a>
+    <btn-switch-theme></btn-switch-theme>
+    <b class="icon"><i class="material-symbols-outlined">expand</i></b>
+</nav>

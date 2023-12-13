@@ -1,0 +1,86 @@
+{
+  "users": [],
+  "books": [
+    {
+      "id": 1,
+      "title": "L'art de la guerre",
+      "description": "Un classique de la stratégie militaire écrit par Sun Tzu. Explore les principes de la guerre et de la tactique.",
+      "author": "Sun Tzu",
+      "creationDate": "Ve siècle avant J.-C."
+    },
+    {
+      "id": 2,
+      "title": "Le Prince",
+      "description": "Un traité politique classique sur la nature du pouvoir et de la gouvernance, écrit par Niccolò Machiavelli.",
+      "author": "Niccolò Machiavelli",
+      "creationDate": "1513"
+    },
+    {
+      "id": 3,
+      "title": "Stratégie",
+      "description": "Un ouvrage qui explore les principes stratégiques à travers l'histoire militaire, écrit par B.H. Liddell Hart.",
+      "author": "B.H. Liddell Hart",
+      "creationDate": "1954"
+    },
+    {
+      "id": 4,
+      "title": "L'art de la persuasion",
+      "description": "Un guide sur les principes de persuasion et d'influence, écrit par Robert B. Cialdini.",
+      "author": "Robert B. Cialdini",
+      "creationDate": "1984"
+    },
+    {
+      "id": 5,
+      "title": "L'Art de la pensée claire",
+      "description": "Un livre qui examine les erreurs de pensée courantes et comment les éviter, écrit par Rolf Dobelli.",
+      "author": "Rolf Dobelli",
+      "creationDate": "2011"
+    },
+    {
+      "id": 6,
+      "title": "Leadership stratégique",
+      "description": "Un livre axé sur le développement du leadership stratégique dans les organisations, écrit par J. Lawler, J. L. Sowa et A. E. Epstein.",
+      "authors": [
+        "J. Lawler",
+        "J. L. Sowa",
+        "A. E. Epstein"
+      ],
+      "creationDate": "2005"
+    },
+    {
+      "id": 7,
+      "title": "La 48 lois du pouvoir",
+      "description": "Un ouvrage sur la réalité du pouvoir et la manière de l'obtenir et de le conserver, écrit par Robert Greene.",
+      "author": "Robert Greene",
+      "creationDate": "1998"
+    },
+    {
+      "id": 8,
+      "title": "Le signal et le bruit",
+      "description": "Une exploration des statistiques et de la prise de décision dans un monde complexe, écrit par Nate Silver.",
+      "author": "Nate Silver",
+      "creationDate": "2012"
+    },
+    {
+      "id": 9,
+      "title": "Le leadership selon Sun Tzu",
+      "description": "Un livre qui applique les enseignements de Sun Tzu au leadership moderne, écrit par Gerald A. Michaelson.",
+      "author": "Gerald A. Michaelson",
+      "creationDate": "2007"
+    },
+    {
+      "id": 10,
+      "title": "Influence et manipulation",
+      "description": "Un regard approfondi sur les mécanismes de l'influence sociale, écrit par Robert B. Cialdini.",
+      "author": "Robert B. Cialdini",
+      "creationDate": "1984"
+    },
+    {
+      "id": 11,
+      "title": "La stratégie du choc",
+      "description": "Un livre qui examine l'utilisation stratégique des crises pour introduire des changements radicaux, écrit par Naomi Klein.",
+      "author": "Naomi Klein",
+      "creationDate": "2007"
+    }
+  ]
+}
