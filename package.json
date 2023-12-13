@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --optimization --base-href /dist/browser/",
+    "github_build": "ng build --optimization --base-href /angular-pokedex/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "fake-api": "json-server --watch config/json-server/fakeDb.json -m ./node_modules/json-server-auth"
