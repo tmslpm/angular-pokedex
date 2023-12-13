@@ -248,7 +248,7 @@ img.emoji {
  */
 
 * {
-    margin: 0; 
+    margin: 0;
     box-sizing: border-box;
 }
 
@@ -592,11 +592,24 @@ img.emoji {
 /**
  * = = = = = = = = = = = = = = = = = = = = = = = = RULE = CSS 
  */
+html,
+body {
+    height: 100%;
+}
+
+.wrapperBodyContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+main {
+    flex: 1;
+}
 
 body {
-    min-height: 100vh;
     color: var(--color-text);
-    background-color: var(--color-background-soft); 
+    background-color: var(--color-background-soft);
     line-height: $lineHeight;
     font-family: var(--font-familly);
     text-rendering: optimizeLegibility;
@@ -610,37 +623,26 @@ button {
     border-width: .1px;
 }
 
-/* width */
 ::-webkit-scrollbar {
     width: var(--scrollbar-size);
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0);
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
     background: var(--color-background-mute);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-love);
 }
 
 /* global href style */
-a.green {
+a.love {
     text-decoration: none;
     color: var(--color-love);
-    transition: 0.4s;
-
-    @media (hover: hover) {
-        &:hover {
-            background-color: rgba(var(--rgb-love), .2);
-        }
-    }
 }
 
 h1,

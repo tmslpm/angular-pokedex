@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Route, Router, RouterModule } from "@angular/router";
-import { HomeComponent } from "@/views/home/home.component";
-import { ErrorComponent } from "@/views/error/error.component";
+import { HomeComponent } from "@/views/Home/home.component";
+import { ErrorComponent } from "@/views/Error/error.component";
 
 export interface MyRoute extends Route {
     show: boolean,

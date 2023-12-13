@@ -8,11 +8,14 @@ import { FooterComponent } from "./components/Footer/footer.component";
   selector: 'app-root',
   standalone: true,
   template: `
-   <menu-component></menu-component>
-    <main class="col-12 padding1">
-      <router-outlet > </router-outlet> 
-    </main> 
-    <footer-component></footer-component>`,
+    <div class="wrapperBodyContent">
+      <menu-component></menu-component>
+      <main class="col-12 padding1">
+        <router-outlet > </router-outlet> 
+      </main> 
+      <footer-component></footer-component>
+    </div>
+  `,
   imports: [
     CommonModule,
     RouterOutlet,

@@ -1,7 +1,4 @@
 - ☐ - finir error page
 - ☐ - ajouter page about
-- ☐ - ajouter lien menu vers pokeApi et vers mon github
-- ☐ - ajouter lien footer vers mon github 
+- ☐ - ajouter lien menu vers pokeApi et vers mon github 
 - ☐ - ajouter version pokedex avec le httpclient
-- ☐ - balancez sur github
-- ☐ - setup github CI pour host sur github
