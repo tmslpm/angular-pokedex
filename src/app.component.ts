@@ -24,7 +24,7 @@ import { FooterComponent } from "./components/Footer/footer.component";
 })
 
 export class AppComponent {
-  title = 'angular-test';
+  title = 'angular-pokedex';
   constructor() { }
 }
 
