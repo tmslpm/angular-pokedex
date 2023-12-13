@@ -17,7 +17,7 @@
                 <div class="pokedexScreenDisplay">
                     <div class="pokemonList">
                         <div *ngFor="let v of this.getPokemonData; index as i" [ngClass]="{'current': this.getPokemonDataStartIndex == i}">
-                            <img class="pokeball" src="/assets/img/pokeball.png" alt="" width="14px" height="14px">
+                            <img class="pokeball" src="./assets/img/pokeball.png" alt="" width="14px" height="14px">
                             <p class="name">{{ v.name }}</p>
                             <p style="margin-left:auto">n°{{v.id}}</p>
                         </div>
