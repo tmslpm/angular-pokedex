@@ -1,5 +1,5 @@
-import { NamedAPIResource } from "../types/PokemonData";
-import { ResponsePokeApi } from "../types/ResponsePokeApi";
+import { NamedAPIResource } from "./types/PokemonData";
+import { ResponsePokeApi } from "./types/ResponsePokeApi";
 
 export abstract class PaginationResponse<T> {
     protected readonly _limit: number;
@@ -42,7 +42,7 @@ export abstract class PaginationResponse<T> {
         })
     }
 
-    protected parseRestFullResponse<V>(data: any): ResponsePokeApi<V> {
+    public static parseRestFullResponse<V>(data: any): ResponsePokeApi<V> {
         let isNullPrevious = !data.previous || data.previous === null;
         let isNullNext = !data.next || data.next === null;
         return {

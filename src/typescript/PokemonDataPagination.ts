@@ -1,4 +1,4 @@
-import { PaginationResponse } from "./core/PaginationResponse";
+import { PaginationResponse } from "./PaginationResponse";
 import { getJSON } from "./module/Fetch";
 import { PokemonData, NamedAPIResource } from "./types/PokemonData";
 
@@ -12,7 +12,7 @@ export class PokemonDataPagination extends PaginationResponse<PokemonData[]> {
         let allPromise: Promise<PokemonData>[] = [];
         await getJSON(endpoint)
             .then(response => {
-                this._responsePagination = this.parseRestFullResponse<NamedAPIResource>(response)
+                this._responsePagination = PaginationResponse.parseRestFullResponse<NamedAPIResource>(response);
                 this._responsePagination.results.forEach(resource => allPromise.push(this.fetchPokemonData(resource.url)));
             })
             .catch(errorFetchPokemonList => {

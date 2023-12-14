@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { Route, Router, RouterModule } from "@angular/router";
 import { HomeComponent } from "@/views/home/home.component";
 import { ErrorComponent } from "@/views/error/error.component";
+import { PokedexFetch } from "@/views/pokedex-fetch/pokedex-fetch.component";
+import { PokedexHttp } from "@/views/pokedex-http/pokedex-http.component";
 
 export interface MyRoute extends Route {
     show: boolean,
@@ -9,8 +11,10 @@ export interface MyRoute extends Route {
 }
 
 export const ROUTES: MyRoute[] = [
-    registerRoute("pokedex", "Pokedex", HomeComponent, "Pokedex"),
+    registerRoute("home", "Home", HomeComponent, "Home"),
     registerRoute("", "Home", HomeComponent),
+    registerRoute("pokedex-fetch", "Pokedex Fetch", PokedexFetch, "Pokedex Fetch Api"),
+    registerRoute("pokedex-http", "Pokedex Http", PokedexHttp, "Pokedex Http Api"),
     registerRoute("**", "Error", ErrorComponent)
 ];
 

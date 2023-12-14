@@ -1,0 +1,93 @@
+<div class="wrapperPokedex">
+    <div class="pokedex">
+        <div class="pokedexBase">
+            <div class="pokedexHead">
+                <div class="pokedexHeadCol1">
+                    <div class="circle"></div>
+                </div>
+                <div class="pokedexHeadCol2">
+                    <div class="bar"></div>
+                    <div class="diag"></div>
+                    <div class="circle red" [ngClass]="{'playAnimation': this.getPlayAnimation}"></div>
+                    <div class="circle yel" [ngClass]="{'playAnimation': this.getPlayAnimation}"></div>
+                    <div class="circle gre" [ngClass]="{'playAnimation': this.getPlayAnimation}"></div>
+                </div>
+            </div>
+            <div class="pokedexScreen">
+                <div class="pokedexScreenDisplay">
+                    <div class="pokemonList">
+                        <div *ngFor="let v of this.getPokemonData; index as i" [ngClass]="{'current': this.getPokemonDataStartIndex == i}">
+                            <img class="pokeball" src="./assets/img/pokeball.png" alt="" width="14px" height="14px">
+                            <p class="name">{{ v.name }}</p>
+                            <p style="margin-left:auto">n°{{v.id}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="diag"></div>
+            </div>
+            <div class="pokedexPad">
+                <div class="pokedexPadtBodyLeft">
+                    <div class="pokedexPadtHead">
+                        <div class="btnCircle" title="no action available (unused)"></div>
+                        <div class="btnOval red" title="no action available (unused)"></div>
+                        <div class="btnOval blue" title="no action available (unused)"></div>
+                    </div>
+                    <div class="pokedexPadtBodyScreenDisplay">
+                        <ng-container *ngIf="this.getCurrentPokemonData !== null">
+                            <img [src]="this.getNextSprite(true)" alt="">
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="pokedexPadtBodyRight">
+                    <div class="pokedexPadtBodybtnCross">
+                        <div (click)="onClickBtnLeftCross('top')" class="top" title="action: previous"></div>
+                        <div (click)="onClickBtnLeftCross('bot')" class="bot" title="action: next"></div>
+                        <div (click)="onClickBtnLeftCross('left')" class="left" title="action: back"></div>
+                        <div (click)="onClickBtnLeftCross('right')" class="right" title="action: show"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pokedexBase right">
+            <div class="pokedexHead">
+                <div class="pokedexHeadCol1">
+                </div>
+                <div class="pokedexHeadCol2">
+                    <div class="bar"></div>
+                    <div class="diag"></div>
+                </div>
+            </div>
+            <div class="pokedexScreen">
+                <div class="pokedexRightScreenDisplay">
+                    <div class="content">
+                        <ng-container *ngIf="this.getCurrentPokemonData !== null">
+                            <p><span class="bold">id</span>: n°{{ this.getCurrentPokemonData.id}}</p>
+                            <p><span class="bold">height</span>: {{ this.getCurrentPokemonData.height }} dm</p>
+                            <p><span class="bold">weight</span>: {{ this.getCurrentPokemonData.weight }} hg</p>
+                            <p><span class="bold">types</span>: {{ this.getCurrentPokemonData.typesParsed}}</p>
+                        </ng-container>
+                    </div>
+                </div> 
+                <div class="pokedexScreenKeyboard">
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">format_list_bulleted</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">package</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">map</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">bolt</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">location_on</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">location_on</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">location_on</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">location_on</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">location_on</i></div>
+                    <div class="key" title="no action available (unused)"><i class="material-symbols-outlined noFill medium">help_center</i></div>
+                </div>
+            </div>
+            <div class="pokedexRightPad">
+                <p> ❓ Directional / Cross button</p>
+                <p>- <span class="bold">top</span>: select previous pokemon</p>
+                <p>- <span class="bold">bot</span>: select next pokemon</p>
+                <p>- <span class="bold">left</span>: show previous sprite pokemon</p>
+                <p>- <span class="bold">right</span>: show next sprite pokemon</p>
+            </div>
+        </div>
+    </div>
+</div>
