@@ -34,7 +34,6 @@ export class PokedexHttp implements OnInit {
       setTimeout(() => this._playAnimation = !this._playAnimation, 1200)
     }
 
-
     switch (btnName) {
       case "top":
         this._spriteIndex = 0;
@@ -53,7 +52,6 @@ export class PokedexHttp implements OnInit {
           this._spriteIndex = this._spriteIndex >= (this.getCurrentPokemonData.spritesParsed.length - 1) ? 0 : this._spriteIndex + 1;
         break;
     }
-
   }
 
   public get getCurrentPokemonData(): PokemonData | null {

@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --optimization --base-href /dist/browser/",
-    "github_build": "ng build --optimization --base-href /angular-pokedex/",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test" 
+    "build": "ng build --localize --optimization --base-href /dist/browser/",
+    "github_build": "ng build --localize --optimization --base-href /angular-pokedex/",
+    "watch": "ng build --watch --localize --configuration development --base-href /dist/browser/",
+    "test": "ng test",
+    "extract_i18n": "ng extract-i18n --format json --output-path src/locale"
   },
   "private": true,
   "dependencies": {
@@ -24,11 +25,12 @@
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.5",
+    "@angular-devkit/build-angular": "^16.2.10",
     "@angular/cli": "^17.0.5",
     "@angular/compiler-cli": "^17.0.0",
+    "@angular/localize": "^17.0.5",
     "@types/jasmine": "~5.1.0",
-    "jasmine-core": "~5.1.0", 
+    "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
