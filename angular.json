@@ -16,6 +16,9 @@
       "i18n": {
         "sourceLocale": "en-US",
         "locales": {
+          "fr-CA": {
+            "translation": "src/locale/messages.fr-CA.json"
+          },
           "fr-FR": {
             "translation": "src/locale/messages.fr-FR.json"
           }

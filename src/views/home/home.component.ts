@@ -11,14 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
-
+  private _pokeApiAvailable: boolean = false;
 
   constructor() {
-
+    this.tryCallApi();
   }
 
   public ngOnInit(): void {
-    // todo idk but why not..: setInterval(() => { this._spriteIndexInverse = this._spriteIndexInverse >= 1 ? 0 : 1; }, 1600)
+    this.tryCallApi();
+    setInterval(this.tryCallApi, 12000 * 50);
+  }
+
+  private tryCallApi() {
+    fetch("https://pokeapi.co/api/v2/pokemon")
+      .then(response => {
+        this._pokeApiAvailable = response.ok;
+      })
+      .catch(error => {
+        console.error("========>", error);
+        this._pokeApiAvailable = false;
+      })
+  }
+
+  public get pokeApiAvailable(): boolean {
+    return this._pokeApiAvailable;
   }
 
 }
