@@ -2,10 +2,10 @@ import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { MenuComponent } from "@/components/Menu/menu.component";
 import { FooterComponent } from "@/components/Footer/footer.component";
+import { NotificationComponent } from "./components/Notification/notification.component";
 
 @Component({
-  selector: "app-root",
-  standalone: true,
+  selector: "app-root", standalone: true,
   template: `
     <div class="wrapperBodyContent">
       <menu-component></menu-component>
@@ -13,9 +13,9 @@ import { FooterComponent } from "@/components/Footer/footer.component";
         <router-outlet > </router-outlet> 
       </main> 
       <footer-component></footer-component>
+      <notification-component></notification-component>
     </div>
   `,
-  imports: [RouterOutlet, MenuComponent, FooterComponent]
+  imports: [RouterOutlet, MenuComponent, FooterComponent, NotificationComponent]
 })
-
 export class MainComponent { }

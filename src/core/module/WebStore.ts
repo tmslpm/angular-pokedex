@@ -1,4 +1,4 @@
-import { KEY_STORE } from "./EKeyStore";
+import { KEY_STORE } from "@/core/enums/EKeyStore";
 
 export class WebStore {
 

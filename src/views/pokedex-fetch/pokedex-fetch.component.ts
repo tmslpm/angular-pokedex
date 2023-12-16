@@ -1,22 +1,23 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { PokemonData } from "@/typescript/types/PokemonData";
-import { PokemonDataPagination } from "@/typescript/PokemonDataPagination";
+import { PokemonData } from "@/core/types/PokemonData";
+import { NotificationService } from "@/services/Notification";
+import { NativeFetchPokedexApi } from "@/services/NativeFetchPokedexApi";
 
 @Component({
-  selector: "app-home",
-  standalone: true,
-  imports: [CommonModule],
+  selector: "app-home", standalone: true, imports: [CommonModule],
   templateUrl: "./pokedex-fetch.component.html"
 })
-
 export class PokedexFetch implements OnInit {
-  private readonly _pokemonDataPagination: PokemonDataPagination;
+  private readonly _pokemonDataPagination: NativeFetchPokedexApi;
+  private readonly _notificationService: NotificationService;
+
   private _spriteIndex: number;
   private _playAnimation: boolean;
 
-  public constructor() {
-    this._pokemonDataPagination = new PokemonDataPagination(9);
+  public constructor(notificationService: NotificationService) {
+    this._notificationService = notificationService;
+    this._pokemonDataPagination = new NativeFetchPokedexApi(9, notificationService);
     this._spriteIndex = 0;
     this._playAnimation = false;
   }
@@ -30,6 +31,9 @@ export class PokedexFetch implements OnInit {
       this._playAnimation = true;
       setTimeout(() => this._playAnimation = !this._playAnimation, 1200)
     }
+
+    if (this._pokemonDataPagination.hasStartedFetch)
+      return;
 
     switch (btnName) {
       case "top":
@@ -51,16 +55,16 @@ export class PokedexFetch implements OnInit {
     }
   }
 
+  public onClickNoAction() {
+    this._notificationService.addInfo("Sorry, this button has no action available..");
+  }
+
   public get getCurrentPokemonData(): PokemonData | null {
-    return this._pokemonDataPagination.data == null
-      ? null
-      : this._pokemonDataPagination.data[this._pokemonDataPagination.currentIndex];
+    return !this.getPokemonData[this._pokemonDataPagination.currentIndex] ? null : this._pokemonDataPagination.data[this._pokemonDataPagination.currentIndex];
   }
 
   public get getPokemonData(): PokemonData[] {
-    return this._pokemonDataPagination.data == null
-      ? []
-      : this._pokemonDataPagination.data;
+    return !this._pokemonDataPagination.data ? [] : this._pokemonDataPagination.data;
   }
 
   public get getPokemonDataStartIndex(): number {

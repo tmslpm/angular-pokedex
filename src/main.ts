@@ -1,7 +1,7 @@
 /// <reference types="@angular/localize" />
 
 import { bootstrapApplication } from "@angular/platform-browser";
-import { MainComponent } from "./main.component";
+import { MainComponent } from "@/main.component";
 import { provideRouter, withHashLocation } from "@angular/router";
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { LOCALE_ID } from "@angular/core";
@@ -18,7 +18,6 @@ registerRoute("pokedex-fetch", "Pokedex Fetch", PokedexFetch, "Pokedex Fetch Api
 registerRoute("pokedex-http", "Pokedex Http", PokedexHttp, "Pokedex Http Api");
 registerRoute("**", "Error", ErrorComponent);
 
-
 bootstrapApplication(MainComponent, {
   providers: [
     provideRouter(ROUTES, withHashLocation()),
@@ -26,7 +25,6 @@ bootstrapApplication(MainComponent, {
     { provide: LOCALE_ID, useValue: "en-US" }
   ]
 }).catch((err) => console.error(err));
-
 
 function registerRoute(path: string, title: string, component: any, titleLink = ""): void {
   ROUTES.push({

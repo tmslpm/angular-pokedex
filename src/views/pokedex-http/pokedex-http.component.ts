@@ -1,26 +1,25 @@
-import { FetchHttpClientPokedexApi } from "@/services/FetchHttpClient";
+import { FetchHttpClientPokedexApi } from "@/services/FetchHttpClientPokedexApi";
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { PokemonData } from "@/typescript/types/PokemonData";
+import { PokemonData } from "@/core/types/PokemonData";
+import { NotificationService } from "@/services/Notification";
 
 @Component({
-  selector: "app-pokedex-http",
-  standalone: true,
-  imports: [
-    CommonModule
-  ],
+  selector: "app-pokedex-http", standalone: true, imports: [CommonModule],
   templateUrl: "./pokedex-http.component.html"
 })
-
 export class PokedexHttp implements OnInit {
+  private readonly _httpClientPokedexApi: FetchHttpClientPokedexApi;
+  private readonly _notificationService: NotificationService;
+
   private _spriteIndex: number;
   private _playAnimation: boolean;
-  private readonly _httpClientPokedexApi: FetchHttpClientPokedexApi;
 
-  public constructor(httpClientPokedexApi: FetchHttpClientPokedexApi) {
+  public constructor(httpClientPokedexApi: FetchHttpClientPokedexApi, notificationService: NotificationService) {
+    this._httpClientPokedexApi = httpClientPokedexApi;
+    this._notificationService = notificationService;
     this._playAnimation = false;
     this._spriteIndex = 0;
-    this._httpClientPokedexApi = httpClientPokedexApi;
   }
 
   public ngOnInit(): void {
@@ -32,6 +31,9 @@ export class PokedexHttp implements OnInit {
       this._playAnimation = true;
       setTimeout(() => this._playAnimation = !this._playAnimation, 1200)
     }
+
+    if (this._httpClientPokedexApi.hasStartedFetch)
+      return;
 
     switch (btnName) {
       case "top":
@@ -53,16 +55,16 @@ export class PokedexHttp implements OnInit {
     }
   }
 
+  public onClickNoAction() {
+    this._notificationService.addInfo("Sorry, this button has no action available..");
+  }
+
   public get getCurrentPokemonData(): PokemonData | null {
-    return this._httpClientPokedexApi.data[this._httpClientPokedexApi.currentIndex] == null
-      ? null
-      : this._httpClientPokedexApi.data[this._httpClientPokedexApi.currentIndex];
+    return !this.getPokemonData[this._httpClientPokedexApi.currentIndex] ? null : this._httpClientPokedexApi.data[this._httpClientPokedexApi.currentIndex];
   }
 
   public get getPokemonData(): PokemonData[] {
-    return this._httpClientPokedexApi.data == null
-      ? []
-      : this._httpClientPokedexApi.data;
+    return !this._httpClientPokedexApi.data ? [] : this._httpClientPokedexApi.data;
   }
 
   public get getPokemonDataStartIndex(): number {

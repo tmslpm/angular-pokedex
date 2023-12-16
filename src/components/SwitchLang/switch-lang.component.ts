@@ -1,20 +1,17 @@
+import { LangDetails } from "@/core/types/LangDetails";
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "btn-switch-lang",
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: "./switch-lang.component.html",
-  styleUrl: "./switch-lang.component.scss"
+  selector: "btn-switch-lang", standalone: true, imports: [CommonModule],
+  templateUrl: "./switch-lang.component.html", styleUrl: "./switch-lang.component.scss"
 })
-
 export class LangSwitchComponent {
   private static LANGs: LangDetails[] = [
     { locale: "en-US", name: "English" },
     { locale: "fr-FR", name: "French" }
   ];
-  
+
   private readonly _currentLang: LangDetails;
 
   public constructor() {
@@ -34,4 +31,3 @@ export class LangSwitchComponent {
   }
 }
 
-export type LangDetails = { locale: string, name: string };

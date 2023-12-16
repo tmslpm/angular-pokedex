@@ -28,9 +28,9 @@
             <div class="pokedexPad">
                 <div class="pokedexPadtBodyLeft">
                     <div class="pokedexPadtHead">
-                        <div class="btnCircle" title="no action available (unused)"></div>
-                        <div class="btnOval red" title="no action available (unused)"></div>
-                        <div class="btnOval blue" title="no action available (unused)"></div>
+                        <div class="btnCircle" title="this button has no action available (unused)" (click)="this.onClickNoAction()"></div>
+                        <div class="btnOval red" title="this button has no action available (unused)" (click)="this.onClickNoAction()"></div>
+                        <div class="btnOval blue" title="this button has no action available (unused)" (click)="this.onClickNoAction()" ></div>
                     </div>
                     <div class="pokedexPadtBodyScreenDisplay">
                         <ng-container *ngIf="this.getCurrentPokemonData !== null">
