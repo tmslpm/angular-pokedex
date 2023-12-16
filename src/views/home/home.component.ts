@@ -1,19 +1,17 @@
-import { NgFor, NgClass, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   standalone: true,
-  imports: [
-    NgIf, NgFor, NgClass
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  imports: [CommonModule],
+  templateUrl: "./home.component.html"
 })
 
 export class HomeComponent implements OnInit {
-  private _pokeApiAvailable: boolean = false;
+  public _pokeApiAvailable: boolean = false;
 
-  constructor() {
+  public constructor() {
     this.tryCallApi();
   }
 

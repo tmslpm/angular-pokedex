@@ -1,13 +1,12 @@
 import { PaginationResponse } from "@/typescript/PaginationResponse";
-import { PokemonDataPagination } from "@/typescript/PokemonDataPagination";
 import { NamedAPIResource, PokemonData } from "@/typescript/types/PokemonData";
 import { ResponsePokeApi } from "@/typescript/types/ResponsePokeApi";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, forkJoin, map, tap } from "rxjs";
+import { Observable, forkJoin, map } from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: "root"
 })
 export class FetchHttpClientPokedexApi {
 
@@ -44,7 +43,7 @@ export class FetchHttpClientPokedexApi {
                                 results.map(item => {
                                     item.typesParsed = item.types.map(v => v.type.name).join(", ");
                                     item.spritesParsed = Object.values(item.sprites)
-                                        .filter(v => typeof v === 'string' && v.startsWith("https"))
+                                        .filter(v => typeof v === "string" && v.startsWith("https"))
                                         .sort((a, b) => (a as string).length - (b as string).length) as string[];
                                 })
 

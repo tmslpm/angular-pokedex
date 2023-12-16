@@ -1,12 +1,12 @@
-import { KEY_STORE } from '@/typescript/module/EKeyStore';
-import { WebStore } from '@/typescript/module/WebStore';
-import { Component, OnInit } from '@angular/core';
+import { KEY_STORE } from "@/typescript/module/EKeyStore";
+import { WebStore } from "@/typescript/module/WebStore";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'btn-switch-theme',
+  selector: "btn-switch-theme",
   standalone: true,
   imports: [],
-  templateUrl: './switch-theme.component.html'
+  templateUrl: "./switch-theme.component.html"
 })
 
 export class SwitchThemeButton implements OnInit {

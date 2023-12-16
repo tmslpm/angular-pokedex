@@ -1,15 +1,13 @@
-import { NgFor, NgClass, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { PokemonData } from '@/typescript/types/PokemonData';
-import { PokemonDataPagination } from '@/typescript/PokemonDataPagination';
+import { CommonModule } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { PokemonData } from "@/typescript/types/PokemonData";
+import { PokemonDataPagination } from "@/typescript/PokemonDataPagination";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   standalone: true,
-  imports: [
-    NgIf, NgFor, NgClass
-  ],
-  templateUrl: './pokedex-fetch.component.html'
+  imports: [CommonModule],
+  templateUrl: "./pokedex-fetch.component.html"
 })
 
 export class PokedexFetch implements OnInit {
@@ -17,7 +15,7 @@ export class PokedexFetch implements OnInit {
   private _spriteIndex: number;
   private _playAnimation: boolean;
 
-  constructor() {
+  public constructor() {
     this._pokemonDataPagination = new PokemonDataPagination(9);
     this._spriteIndex = 0;
     this._playAnimation = false;
@@ -54,13 +52,15 @@ export class PokedexFetch implements OnInit {
   }
 
   public get getCurrentPokemonData(): PokemonData | null {
-    if (this._pokemonDataPagination.data == null) return null;
-    return this._pokemonDataPagination.data[this._pokemonDataPagination.currentIndex];
+    return this._pokemonDataPagination.data == null
+      ? null
+      : this._pokemonDataPagination.data[this._pokemonDataPagination.currentIndex];
   }
 
   public get getPokemonData(): PokemonData[] {
-    if (this._pokemonDataPagination.data == null) return [];
-    return this._pokemonDataPagination.data;
+    return this._pokemonDataPagination.data == null
+      ? []
+      : this._pokemonDataPagination.data;
   }
 
   public get getPokemonDataStartIndex(): number {
@@ -71,10 +71,10 @@ export class PokedexFetch implements OnInit {
     return this._playAnimation;
   }
 
-  public getNextSprite(next: boolean): string {
-    if (this.getCurrentPokemonData != null)
-      return this.getCurrentPokemonData.spritesParsed[this._spriteIndex];
-    return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC"
+  public getNextSprite(): string {
+    return this.getCurrentPokemonData != null
+      ? this.getCurrentPokemonData.spritesParsed[this._spriteIndex]
+      : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC"
   }
 
 }

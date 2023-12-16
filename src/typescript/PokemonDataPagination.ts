@@ -29,9 +29,9 @@ export class PokemonDataPagination extends PaginationResponse<PokemonData[]> {
 
                 // get sprite and parse to string (filter null value)
                 responsePokemonData.spritesParsed = Object.values(responsePokemonData.sprites)
-                    .filter(v => typeof v === 'string' && v.startsWith("https"))
+                    .filter(v => typeof v === "string" && v.startsWith("https"))
                     .sort((a, b) => (a as string).length - (b as string).length) as string[];
-                
+
                 resolve(responsePokemonData);
             }).catch(e => reject(e))
         )

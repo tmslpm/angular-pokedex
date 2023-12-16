@@ -1,15 +1,15 @@
-import { FetchHttpClientPokedexApi } from '@/services/FetchHttpClient';
-import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { PokemonData } from '@/typescript/types/PokemonData';
+import { FetchHttpClientPokedexApi } from "@/services/FetchHttpClient";
+import { CommonModule } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { PokemonData } from "@/typescript/types/PokemonData";
 
 @Component({
-  selector: 'app-pokedex-http',
+  selector: "app-pokedex-http",
   standalone: true,
   imports: [
-    NgIf, NgFor, NgClass
+    CommonModule
   ],
-  templateUrl: './pokedex-http.component.html'
+  templateUrl: "./pokedex-http.component.html"
 })
 
 export class PokedexHttp implements OnInit {
@@ -17,14 +17,13 @@ export class PokedexHttp implements OnInit {
   private _playAnimation: boolean;
   private readonly _httpClientPokedexApi: FetchHttpClientPokedexApi;
 
-  constructor(httpClientPokedexApi: FetchHttpClientPokedexApi) {
+  public constructor(httpClientPokedexApi: FetchHttpClientPokedexApi) {
     this._playAnimation = false;
     this._spriteIndex = 0;
     this._httpClientPokedexApi = httpClientPokedexApi;
   }
 
   public ngOnInit(): void {
-    // todo idk but why not..: setInterval(() => { this._spriteIndexInverse = this._spriteIndexInverse >= 1 ? 0 : 1; }, 1600)
     this._httpClientPokedexApi.init();
   }
 
@@ -55,15 +54,15 @@ export class PokedexHttp implements OnInit {
   }
 
   public get getCurrentPokemonData(): PokemonData | null {
-    if (this._httpClientPokedexApi.data[this._httpClientPokedexApi.currentIndex] == null)
-      return null;
-    return this._httpClientPokedexApi.data[this._httpClientPokedexApi.currentIndex];
+    return this._httpClientPokedexApi.data[this._httpClientPokedexApi.currentIndex] == null
+      ? null
+      : this._httpClientPokedexApi.data[this._httpClientPokedexApi.currentIndex];
   }
 
   public get getPokemonData(): PokemonData[] {
-    if (this._httpClientPokedexApi.data == null)
-      return [];
-    return this._httpClientPokedexApi.data;
+    return this._httpClientPokedexApi.data == null
+      ? []
+      : this._httpClientPokedexApi.data;
   }
 
   public get getPokemonDataStartIndex(): number {
@@ -74,11 +73,10 @@ export class PokedexHttp implements OnInit {
     return this._playAnimation;
   }
 
-  public getNextSprite(next: boolean): string {
-    if (this.getCurrentPokemonData != null)
-      return this.getCurrentPokemonData.spritesParsed[this._spriteIndex];
-    return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC"
+  public getNextSprite(): string {
+    return this.getCurrentPokemonData != null
+      ? this.getCurrentPokemonData.spritesParsed[this._spriteIndex]
+      : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC"
   }
 
 }
-

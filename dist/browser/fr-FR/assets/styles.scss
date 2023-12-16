@@ -471,6 +471,18 @@ img.emoji {
     margin-right: 10px
 }
 
+.margin0 {
+    margin: 5px
+}
+
+.marging1 {
+    margin: 15px
+}
+
+.margin2 {
+    margin: 35px
+}
+
 /***************************************/
 /* PADDING */
 .padding0 {
@@ -514,7 +526,7 @@ img.emoji {
     align-items: center;
 }
 
-.centerItemHorizontalVertical { 
+.centerItemHorizontalVertical {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -618,12 +630,31 @@ code {
 
 hr {
     margin: 8px 0;
-    height: 0.004em;
+    height: 0.04em;
     background-color: var(--color-love);
     opacity: 0.8;
     border: 0;
 }
- 
+
+.dropdown {
+    position: relative;
+
+    &:hover .dropdown-content {
+        display: block;
+    }
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute; 
+    width: 100%;
+    z-index: 50; 
+
+    a {
+        display: block!important;
+    }
+}
+
 .wrapperPokedex {
     --main-bg: var(--color-background-soft);
     padding: 20px;
@@ -1010,12 +1041,12 @@ hr {
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            
+
                             &:active {
                                 margin-top: 3px;
                                 margin-bottom: -3px;
                                 box-shadow: unset;
-                            } 
+                            }
                         }
                     }
                 }

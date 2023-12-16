@@ -526,7 +526,7 @@ img.emoji {
     align-items: center;
 }
 
-.centerItemHorizontalVertical { 
+.centerItemHorizontalVertical {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -635,7 +635,26 @@ hr {
     opacity: 0.8;
     border: 0;
 }
- 
+
+.dropdown {
+    position: relative;
+
+    &:hover .dropdown-content {
+        display: block;
+    }
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute; 
+    width: 100%;
+    z-index: 50; 
+
+    a {
+        display: block!important;
+    }
+}
+
 .wrapperPokedex {
     --main-bg: var(--color-background-soft);
     padding: 20px;
@@ -1022,12 +1041,12 @@ hr {
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            
+
                             &:active {
                                 margin-top: 3px;
                                 margin-bottom: -3px;
                                 box-shadow: unset;
-                            } 
+                            }
                         }
                     }
                 }
