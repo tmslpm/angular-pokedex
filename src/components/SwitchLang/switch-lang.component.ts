@@ -15,7 +15,11 @@ export class LangSwitchComponent {
   private readonly _currentLang: LangDetails;
 
   public constructor() {
-    this._currentLang = LangSwitchComponent.LANGs.find(v => window.location.pathname.includes(v.locale)) || LangSwitchComponent.LANGs[0];
+    this._currentLang = LangSwitchComponent.getCurrentLang();
+  }
+
+  public static getCurrentLang() {
+    return LangSwitchComponent.LANGs.find(v => window.location.pathname.includes(v.locale)) || LangSwitchComponent.LANGs[0];
   }
 
   public get langs(): LangDetails[] {

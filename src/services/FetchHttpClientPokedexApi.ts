@@ -3,7 +3,7 @@ import { ResponsePaginationApi } from "@/core/types/ResponsePaginationApi";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, forkJoin, map } from "rxjs";
-import { NativeFetchPokedexApi } from "@/services/NativeFetchPokedexApi";
+import { NativeFetchPokedexApi } from "@/views/pokedex-v2/NativeFetchPokedexApi";
 import { NotificationService } from "@/services/Notification";
 
 @Injectable({ providedIn: "root" })
@@ -32,7 +32,7 @@ export class FetchHttpClientPokedexApi {
         this._hasStartedRequest = true;
         this._fetchHttp
             .get<ResponsePaginationApi<NamedAPIResource, PokemonData>>(endpoint, {})
-            .pipe(map(response => NativeFetchPokedexApi.parseRestFullResponse<NamedAPIResource[], PokemonData[]>(response)))
+            .pipe(map(response => FetchHttpClientPokedexApi.parseRestFullResponse<NamedAPIResource[], PokemonData[]>(response)))
             .subscribe({
                 next: (response) => {
                     this._currentResponse = response;
@@ -60,6 +60,17 @@ export class FetchHttpClientPokedexApi {
                     this._notificationService.addNetworkError();
                 }
             });
+    }
+
+    public static parseRestFullResponse<V0, V1>(data: any): ResponsePaginationApi<V0, V1> {
+        let isNullPrevious = !data.previous || data.previous === null;
+        let isNullNext = !data.next || data.next === null;
+        return {
+            hasPrevious: !isNullPrevious, previous: isNullPrevious ? "" : data.previous,
+            hasNext: !isNullNext, next: isNullNext ? "" : data.next,
+            results: data.results,
+            other: data.other
+        };
     }
 
     public previous(): void {

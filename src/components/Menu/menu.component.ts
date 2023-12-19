@@ -4,7 +4,8 @@ import { CommonModule } from "@angular/common";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { SwitchThemeButton } from "@/components/SwitchTheme/switch-theme.component";
 import { LangSwitchComponent } from "@/components/SwitchLang/switch-lang.component";
-import { MyRoute, ROUTES } from "@/main";
+import { ROUTES } from "@/main";
+import { MyRoute } from "@/core/types/MyRoute";
 
 @Component({
   selector: "menu-component",

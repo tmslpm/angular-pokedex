@@ -2,8 +2,9 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-home", standalone: true, imports: [CommonModule],
-  templateUrl: "./home.component.html"
+    selector: "app-home", standalone: true,
+    templateUrl: "./home.component.html",
+    imports: [CommonModule]
 })
 export class HomeComponent implements OnInit {
   public _pokeApiAvailable: boolean = false;

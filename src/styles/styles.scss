@@ -1,7 +1,6 @@
-@import "./css/normalize.css";
+@import "./normalize.css";
 
 $lineHeight: 1.4;
-
 
 :root {
     --border-radius: 5px;
@@ -196,7 +195,7 @@ img.emoji {
     font-family: 'Material Symbols Outlined';
     font-style: normal;
     font-weight: 100 700;
-    src: url("font/googleFont.woff2") format('woff2');
+    src: url("./googleFont.woff2") format('woff2');
 }
 
 
@@ -606,7 +605,6 @@ button {
     background: var(--color-love);
 }
 
-/* global href style */
 a.love {
     text-decoration: none;
     color: var(--color-love);
@@ -639,20 +637,39 @@ hr {
 .dropdown {
     position: relative;
 
-    &:hover .dropdown-content {
+    &:hover .dropdownContent {
         display: block;
     }
 }
 
-.dropdown-content {
+.dropdownContent {
     display: none;
-    position: absolute; 
+    position: absolute;
     width: 100%;
-    z-index: 50; 
 
     a {
-        display: block!important;
+        display: block !important;
     }
+}
+
+.waitingText:empty {
+    margin: auto;
+    background-image:
+        linear-gradient(lightgray 20px, transparent 0),
+        linear-gradient(lightgray 20px, transparent 0),
+        linear-gradient(lightgray 20px, transparent 0),
+        linear-gradient(lightgray 20px, transparent 0);
+    background-repeat: repeat-y;
+    background-size:
+        350px 200px,
+        350px 200px,
+        350px 200px,
+        350px 200px;
+    background-position:
+        120px 0,
+        120px 40px,
+        120px 80px,
+        120px 120px;
 }
 
 .wrapperPokedex {
@@ -663,6 +680,7 @@ hr {
     border-radius: 5px;
     background: var(--main-bg);
     user-select: none;
+
 
     .pokedex {
         --border-radius: 25px;
@@ -705,6 +723,24 @@ hr {
                         border-radius: 100%;
                         width: calc(var(--left-head-height)/2);
                         height: calc(var(--left-head-height)/2);
+
+                        @mixin animationTTS($name, $duration, $type, $colorA1, $colorA2) {
+                            animation: $name $duration infinite $type;
+
+                            @keyframes #{$name} {
+                                @for $i from 0 through 100 {
+                                    #{$i * 1%} {
+                                        background: radial-gradient(circle, $colorA1 $i * 1%, $colorA2 100%);
+                                    }
+                                }
+                            }
+                        }
+
+                        @include animationTTS(animationTTS0, .5s, alternate, rgb(72, 160, 248), rgb(161, 194, 226)); 
+
+                        &.animateTTS0 {
+                            @include animationTTS(animationTTS0, .8s, alternate, rgba(79, 153, 227, 1), rgba(124, 189, 254, 1));
+                        }
                     }
                 }
 
@@ -721,9 +757,9 @@ hr {
                         position: absolute;
                         right: 0;
                         z-index: 1;
-                        background-color: rgb(249, 63, 63);
                         width: 71.7%;
                         height: 50%;
+                        background-color: rgb(249, 63, 63);
                         border-bottom: var(--head-border-width) solid rgb(182 54 51);
 
                     }
@@ -732,10 +768,10 @@ hr {
                         position: absolute;
                         left: 0;
                         top: -188.5px;
-                        background-color: rgb(249, 63, 63);
                         width: 100%;
                         height: 200px;
                         transform: skewY(-35deg);
+                        background-color: rgb(249, 63, 63);
                         border-bottom: var(--head-border-width) solid rgb(182 54 51);
                         outline: 1px solid rgb(182 54 51);
                     }
@@ -748,50 +784,31 @@ hr {
                         z-index: 5;
                         box-shadow: inset 0 0 5px 1px rgba(81, 81, 81, 0.496), 0 0 2px 1px rgba(0, 0, 0, 0.468);
 
-                        &.red {
-                            background: rgb(248, 58, 77);
-                            background: radial-gradient(circle, rgb(248, 58, 77) 0%, rgb(248, 58, 77) 10%);
+                        @mixin animationLed($name, $duration, $inactiveColor, $colorA1, $colorA2) {
+                            background: $inactiveColor;
+                            background: radial-gradient(circle, $inactiveColor 0%, $inactiveColor 10%);
 
                             &.playAnimation {
-                                animation: circleAnimeRed .2s infinite linear;
+                                animation: $name $duration infinite linear;
                             }
+
+                            @keyframes #{$name} {
+                                100% {
+                                    background: radial-gradient(circle, $colorA1 0%, $colorA2 100%);
+                                }
+                            }
+                        }
+
+                        &.red {
+                            @include animationLed(circleAnimeRed, .2s, rgb(248, 58, 77), rgb(255, 87, 104), rgb(255, 70, 89));
                         }
 
                         &.yel {
-                            background: rgb(184, 190, 23);
-                            background: radial-gradient(circle, rgb(184, 190, 23) 0%, rgb(186, 191, 35) 10%);
-
-                            &.playAnimation {
-                                animation: circleAnimeYel .3s infinite linear;
-                            }
+                            @include animationLed(circleAnimeYel, .3s, rgb(184, 190, 23), rgb(245, 255, 0), rgb(247, 251, 131));
                         }
 
                         &.gre {
-                            background: rgb(91 194 117);
-                            background: radial-gradient(circle, rgb(91 194 117) 0%, rgb(91 194 117) 10%);
-
-                            &.playAnimation {
-                                animation: circleAnimeGre .4s infinite linear;
-                            }
-                        }
-
-
-                        @keyframes circleAnimeRed {
-                            100% {
-                                background: radial-gradient(circle, rgb(255, 87, 104) 0%, rgb(255, 70, 89) 100%);
-                            }
-                        }
-
-                        @keyframes circleAnimeYel {
-                            100% {
-                                background: radial-gradient(circle, rgb(245, 255, 0) 0%, rgb(247, 251, 131) 100%);
-                            }
-                        }
-
-                        @keyframes circleAnimeGre {
-                            100% {
-                                background: radial-gradient(circle, rgb(111, 255, 147) 0%, rgb(129, 255, 160) 100%);
-                            }
+                            @include animationLed(circleAnimeGre, .4s, rgb(91 194 117), rgb(111, 255, 147), rgb(129, 255, 160));
                         }
                     }
                 }
@@ -813,18 +830,13 @@ hr {
                     width: 80%;
                     height: 80%;
                     z-index: 2;
-                    background: rgb(107 166 110);
-                    background-image: linear-gradient(rgba(93, 147, 96, 0.5) .05em, transparent .05em);
-                    background-size: 100% 0.8em;
-                    box-shadow: inset 0px 0 2px 1.2px black;
-                    border-radius: 5px;
                 }
 
                 .diag {
                     position: absolute;
                     bottom: -250px;
                     left: 0;
-                    background-color: rgb(2255 255 255);
+                    background-color: rgb(224, 224, 224);
                     width: 200%;
                     height: 300%;
                     transform: skewY(45deg);
@@ -846,7 +858,6 @@ hr {
                     height: 80%;
 
                     .btnCircle {
-                        cursor: pointer;
                         background: rgb(80 80 81);
                         border-radius: 100%;
                         width: 40px;
@@ -861,7 +872,6 @@ hr {
                     }
 
                     .btnOval {
-                        cursor: pointer;
                         border-radius: 10px;
                         margin: 7px;
                         width: 40px;
@@ -891,11 +901,6 @@ hr {
                     height: 50%;
 
                     .pokedexPadtBodyScreenDisplay {
-                        background: rgb(107 166 110);
-                        background-image: linear-gradient(rgba(93, 147, 96, 0.5) .05em, transparent .05em);
-                        background-size: 100% 0.8em;
-                        box-shadow: inset 0px 0 2px 1.2px black;
-                        border-radius: 5px;
                         width: 118px;
                         height: 80px;
                         margin: 0 auto;
@@ -925,7 +930,6 @@ hr {
                         .bot,
                         .left,
                         .right {
-                            cursor: pointer;
                             position: absolute;
                             background-color: rgb(80 80 81);
                             border-radius: 4px;
@@ -937,6 +941,8 @@ hr {
                             --btn-cross-height: calc(var(--cross-width) / 3.5);
                             width: var(--btn-cross-height);
                             height: calc(var(--btn-cross-height) * 1.35);
+                            left: 50%;
+                            transform: translate(-50%, 0);
 
                             &:active {
                                 margin-top: 2px;
@@ -949,6 +955,8 @@ hr {
                             --btn-cross-height: calc(var(--cross-width) / 3.5);
                             height: var(--btn-cross-height);
                             width: calc(var(--btn-cross-height) * 1.35);
+                            bottom: 50%;
+                            transform: translate(0, 50%);
 
                             &:active {
                                 margin-top: 4px;
@@ -958,29 +966,21 @@ hr {
 
                         .top {
                             top: 0;
-                            left: 50%;
-                            transform: translate(-50%, 0);
                             margin-top: -2px
                         }
 
                         .bot {
                             bottom: 0;
-                            left: 50%;
-                            transform: translate(-50%, 0);
                             margin-bottom: -2px;
                         }
 
                         .right {
-                            bottom: 50%;
                             right: 0;
-                            transform: translate(0, 50%);
                             margin-right: -1.5px;
                         }
 
                         .left {
-                            bottom: 50%;
                             left: 0;
-                            transform: translate(0, 50%);
                             margin-left: -1.5px;
                         }
                     }
@@ -1007,30 +1007,34 @@ hr {
                 .pokedexScreen {
                     background: unset !important;
                     transform: rotateY(180deg);
+                    height: 100% !important;
 
                     .pokedexRightScreenDisplay {
-                        height: 41%;
+                        height: 28%;
                         width: 100%;
-                        background: rgb(107 166 110);
-                        background-image: linear-gradient(rgba(93, 147, 96, 0.5) .05em, transparent .05em);
-                        background-size: 100% 0.8em;
-                        box-shadow: inset 0px 0 2px 1.2px black;
-                        border-radius: 5px;
                         margin: 10px 0;
 
                         .content {
-                            padding: 8px 0 0 12px;
+                            padding: 8px 12px 0 12px;
                             line-height: 19px;
+
+                            input,
+                            button {
+                                font-size: 16px;
+                                background-color: transparent;
+                                color: currentColor;
+                                border: 1px solid rgb(145, 212, 148);
+                                border-radius: 4px;
+                                margin-right: 1px;
+                            }
                         }
                     }
 
                     .pokedexScreenKeyboard {
                         display: flex;
                         flex-wrap: wrap;
-                        margin-top: 15px;
 
                         .key {
-                            cursor: pointer;
                             margin: 2px;
                             width: 49px;
                             height: 49px;
@@ -1050,22 +1054,6 @@ hr {
                         }
                     }
                 }
-
-                .pokedexRightPad {
-                    position: relative;
-                    transform: rotateY(180deg);
-                    width: 80%;
-                    height: 120px;
-                    margin: 15px auto;
-                    overflow: hidden;
-                    border-radius: 5px;
-                    background: rgb(107 166 110);
-                    background-image: linear-gradient(rgba(93, 147, 96, 0.5) .05em, transparent .05em);
-                    background-size: 100% 0.8em;
-                    box-shadow: inset 0px 0 2px 1.2px black;
-                    padding: 6px 0 0 8px;
-                    line-height: 22px;
-                }
             }
         }
 
@@ -1081,7 +1069,7 @@ hr {
 
                 .pokeball {
                     margin: 0 7px 0 1px;
-                    opacity: 0.5;
+                    opacity: 0.7;
                 }
 
                 &::before,
@@ -1122,5 +1110,15 @@ hr {
                 }
             }
         }
+
+        .bgScreen {
+            background: rgb(107 166 110);
+            background-image: linear-gradient(rgba(93, 147, 96, 0.5) .05em, transparent .05em);
+            background-size: 100% 0.8em;
+            box-shadow: inset 0px 0 2px 1.2px black;
+            border-radius: 5px;
+        }
+
+
     }
 }

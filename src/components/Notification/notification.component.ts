@@ -13,7 +13,6 @@ export class NotificationComponent {
 
   public constructor(notificationService: NotificationService) {
     this._notificationService = notificationService;
-
     /**
       for (let index = 0; index < 33;) {
         this._notificationService.addInfo(index++ + " - Hi this is a info notification")
@@ -23,8 +22,9 @@ export class NotificationComponent {
      */
   }
 
-  public get notifications(): IterableIterator<NotificationDetails> {
-    return this._notificationService.notifications;
+  public get notifications(): NotificationDetails[] {
+    // copy array for prevent Error:NG0100 https://angular.io/errors/NG0100 
+    return Array.from(this._notificationService.notifications);
   }
 
   public notificationType(currentType: ENotificationType): string {

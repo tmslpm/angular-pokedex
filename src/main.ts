@@ -5,15 +5,17 @@ import { MainComponent } from "@/main.component";
 import { provideRouter, withHashLocation } from "@angular/router";
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { LOCALE_ID } from "@angular/core";
-import { Route } from "@angular/router";
 import { HomeComponent } from "@/views/home/home.component";
 import { ErrorComponent } from "@/views/error/error.component";
-import { PokedexFetch } from "@/views/pokedex-fetch/pokedex-fetch.component";
-import { PokedexHttp } from "@/views/pokedex-http/pokedex-http.component";
+import { PokedexFetch } from "@/views/pokedex/pokedex-fetch.component";
+import { PokedexHttp } from "@/views/pokedex/pokedex-http.component";
+import { MyRoute } from "@/core/types/MyRoute";
+import { PokedexFetchV2 } from "./views/pokedex-v2/pokedex-fetch.component";
 
 export const ROUTES: MyRoute[] = [];
 registerRoute("home", "Home", HomeComponent, "Home");
 registerRoute("", "Home", HomeComponent);
+registerRoute("pokedex-v2", "Pokedex V2", PokedexFetchV2, "Pokedex V2");
 registerRoute("pokedex-fetch", "Pokedex Fetch", PokedexFetch, "Pokedex Fetch Api");
 registerRoute("pokedex-http", "Pokedex Http", PokedexHttp, "Pokedex Http Api");
 registerRoute("**", "Error", ErrorComponent);
@@ -34,9 +36,4 @@ function registerRoute(path: string, title: string, component: any, titleLink = 
     component: component,
     show: titleLink.length > 0
   });
-}
-
-export interface MyRoute extends Route {
-  show: boolean,
-  titleLink?: string | "unused",
 }
