@@ -6,17 +6,17 @@
   - [Create: Pipes](#create-pipes)
   - [Create: Directive](#create-directive)
   - [Create: Components](#create-components)
-  - [Component Cycle de vie](#component-cycle-de-vie)
-  - [Templates](#templates)
-    - [Bindings](#bindings)
-    - [Pipes](#pipes)
-    - [Template Reference Variable](#template-reference-variable)
-  - [Directives](#directives)
+    - [Component Cycle de vie](#component-cycle-de-vie)
+  - [Template Bindings](#template-bindings)
+  - [Template Pipes](#template-pipes)
+  - [Template Reference Variable](#template-reference-variable)
+  - [Template Directives](#template-directives)
     - [Directives: structural directives](#directives-structural-directives)
     - [Directives: Attribute directives](#directives-attribute-directives)
     - [Directives: Other](#directives-other)
   - [Others](#others)
     - [Types Subject](#types-subject)
+    - [Ref HTML in Component](#ref-html-in-component)
 
 ## Create: Services
 
@@ -41,54 +41,60 @@ export class LoggerService {
       console.log(msg); 
    }
 
-   public error(msg: any): void  { 
+   public error(msg: any): void { 
       console.error(msg); 
    }
 
-   public warn(msg: any): void   { 
+   public warn(msg: any): void { 
       console.warn(msg);
    }
-
 }
 ```
+
+**🔝 [back to top](#note-angular-17)**
 
 ## Create: Resolvers
 
 ```ts
 export const resolver: ResolveFn<string> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): string => {
-    return "hello"
-}
+   return "hello"
+};
 
 export const resolver: ResolveFn<string> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> => {
-    return of("hello");
-}
+   return of("hello");
+};
 
 export const resolver: ResolveFn<string> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<string> => {
-    return new Promise(resolve => resolve("hello"));
-} 
+   return new Promise(resolve => resolve("hello"));
+};
 
-// With Service ! 
+// avec injection d'un service ! 
 export const resolver: ResolveFn<string> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> => {
-    return inject(ExampleService).fetchApi();
-}
+   return inject(ExampleService).fetchApi();
+};
 ```
+
+**🔝 [back to top](#note-angular-17)**
 
 ## Create: Pipes
 
-lire: [Pipes](#pipes)
+lire: [template pipes](#template-pipes)
 
 ```ts
 @Pipe({ name: 'myPipe' })
 export class ExamplePipe implements PipeTransform {
-    public transform(value: string): string {
-        return value.toUpperCase();
-    }
+
+   public transform(value: string): string {
+      return value.toUpperCase();
+   }
 }
 ```
 
+**🔝 [back to top](#note-angular-17)**
+
 ## Create: Directive
 
-lire: [Directives](#directives)
+lire: [template directives](#template-directives)
 
 ```ts
 @Directive({ selector: '[hoverHighlight]', standalone: true })
@@ -111,28 +117,19 @@ export class HoverHighlightDirective {
 }
 ```
 
+**🔝 [back to top](#note-angular-17)**
+
 ## Create: Components
 
 En utilisant le HTML et le CSS dans des fichiers distincts :
 
 ```ts
 @Component({
-   selector: "example-component", 
-   standalone: true,
+   selector: "example-component", standalone: true,
    templateUrl: "./example.component.html", 
    styleUrl: "./example.component.scss", 
-})
-export class ExampleComponent { }
-```
-
-Ou en intégrant directement le HTML et le CSS dans l'objet :
-
-```ts
-@Component({
-   selector: "example-component", 
-   standalone: true, 
-   template: `<p>inline HTML</p>`, 
-   styles: `.inline { display: inline }`
+   // template: `<p>inline HTML</p>`,        <<<< ou inline html
+   // styles: `.inline { display: inline }`  <<<< ou inline css/scss
 })
 export class ExampleComponent { }
 ```
@@ -141,14 +138,9 @@ Example avec un SVG comme template
 
 ```ts
 @Component({
-  standalone: true,
-  selector: 'app-svg',
-  // templateUrl: './svg.component.svg', <--- ou dans un fichier distinct...
-  template: `
-   <svg>
-      <g><rect x="0" y="0" width="100" height="100" [attr.fill]="fillColor"/></g>
-   </svg>
-  `,
+  standalone: true, selector: 'app-svg',
+  // templateUrl: './svg.component.svg', <<<< ou dans un fichier distinct...
+  template: `<svg><g><rect x="0" y="0" width="100" height="100" [attr.fill]="fillColor"/></g></svg>`,
   styleUrls: ['./svg.component.css']
 })
 export class SvgComponent {
@@ -156,16 +148,44 @@ export class SvgComponent {
 }
 ```
 
+Avec des propriétés d'entrée
+
+```ts
+@Component({
+   selector: "example-component", 
+   standalone: true, 
+   templateUrl: "./example.component.html" 
+})
+export class ExampleComponent {
+  @Input() 
+  public props1: number; 
+  private _props2: number;
+
+  public constructor() {
+    this.props1 = 10; // Valeur par défaut
+    this._props2 = 50; // Valeur par défaut
+  }
+
+  // Ou sur un setter
+  @Input()
+  public set props2(v: number) {
+    this._props2 = v;
+  } 
+}
+```
+
+```html
+<example-component [props1]="9" [props2]="5"></example-component>
+```
+
 Avec projection de contenu sur un seul emplacement
 
 ```ts
 @Component({
-   selector: 'example-component',
-   standalone: true,
+   selector: 'example-component', standalone: true,
    template: `
       <h3>default slot:</h3>
-      <ng-content></ng-content>
-   `
+      <ng-content></ng-content>`
 })
 export class ExampleComponent {}
 ```
@@ -180,8 +200,7 @@ Avec projection de contenu multi-slots
 
 ```ts
 @Component({
-   selector: 'example-component',
-   standalone: true,
+   selector: 'example-component', standalone: true,
    template: `
       <h3>default slot:</h3>
       <ng-content></ng-content> 
@@ -190,8 +209,7 @@ Avec projection de contenu multi-slots
       <h3>slot 1:</h3>
       <ng-content select="[slot_1]"></ng-content>
       <h3>slot 2:</h3>
-      <ng-content select="[slot_2]"></ng-content>
-   `
+      <ng-content select="[slot_2]"></ng-content>`
 })
 export class ExampleComponent {}
 ```
@@ -205,7 +223,9 @@ export class ExampleComponent {}
 </example-component>
 ```
 
-## Component Cycle de vie
+**🔝 [back to top](#note-angular-17)**
+
+### Component Cycle de vie
 
 | Methode | But |
 |---------------------------|----------------------------------------------|
@@ -218,9 +238,9 @@ export class ExampleComponent {}
 | `ngAfterViewChecked()` | Répondez après qu'Angular ait vérifié les vues et les vues enfants du composant, ou la vue qui contient la directive. Appelé après le `ngAfterViewInit()` et à chaque suivant `ngAfterContentChecked()`. |
 | `ngOnDestroy()` | Nettoyage juste avant qu'Angular ne détruise la directive ou le composant. Désabonnez-vous des observables et détachez les gestionnaires d'événements pour éviter les fuites de mémoire. |
 
-## Templates
+**🔝 [back to top](#note-angular-17)**
 
-### Bindings
+## Template Bindings
 
 1. Interpolations:
    - Permet d'incorporer des valeurs de variables du composant directement dans le template HTML.
@@ -279,7 +299,9 @@ export class ExampleComponent {}
    - La liaison bidirectionnelle donne aux composants de votre application un moyen de partager des données.
    - Syntaxe : `[(size)]="fontSizePx"`
 
-### Pipes
+**🔝 [back to top](#note-angular-17)**
+
+## Template Pipes
 
 Les pipes sont des fonctions simples à utiliser dans les expressions de modèle pour accepter une valeur d'entrée et renvoyer une valeur transformée. Pour appliquer un pipe, utilisez l'opérateur pipe (`|`) dans une expression de template, comme indiqué dans l'exemple de code suivant.
 
@@ -305,7 +327,9 @@ Angular fournit des pipe pour les transformations de données typiques
 
 > Liste complète des pipe intégrés: [angular.io/api/common#pipes](https://angular.io/api/common#pipes)
 
-### Template Reference Variable
+**🔝 [back to top](#note-angular-17)**
+
+## Template Reference Variable
 
 Les variables de template vous aident à utiliser les données d'une partie d'un template dans une autre partie du template.
 
@@ -320,12 +344,28 @@ Une variable de template peut faire référence aux éléments suivants :
 <!-- Champ de saisie du numéro de téléphone avec une référence locale (#phone) pour accéder à sa valeur. -->
 <input #phone placeholder="Numéro de téléphone" value="045255578"/>
 <!-- Bouton déclenchant la function onAlert du component lorsqu'il est cliqué. -->
-<button type="button" (click)="onAlert(phone.value)">Appeler</button>
+<button type="button" (click)="onLog(phone.value)">Appeler</button>
 ```
 
-## Directives
+```ts
+class ExampleComponent {
+   @ViewChild('phone')
+   public inputElement: ElementRef;
 
-Angular propose un ensemble de directives intégrées que vous pouvez utiliser dans vos templates. Voici une liste de certaines des directives les plus couramment utilisées :
+   public onLog(value) {
+      console.log('from arg', value);
+      console.log('from field', this.inputElement.nativeElement.textContent);
+   }
+}
+```
+
+**🔝 [back to top](#note-angular-17)**
+
+## Template Directives
+
+Angular propose un ensemble de directives intégrées que vous pouvez utiliser dans vos templates. Voici une liste de certaines des directives les plus couramment utilisées
+
+**🔝 [back to top](#note-angular-17)**
 
 ### Directives: structural directives
 
@@ -362,6 +402,8 @@ Les directives structurelles sont responsables de la mise en page HTML. Ils faç
    </div>
    ```
 
+**🔝 [back to top](#note-angular-17)**
+
 ### Directives: Attribute directives
 
 Les directives d'attribut écoutent et modifient le comportement d'autres éléments, attributs, propriétés et composants HTML.
@@ -384,6 +426,8 @@ Les directives d'attribut écoutent et modifient le comportement d'autres élém
    <input [(ngModel)]="variable" />
    ```
 
+**🔝 [back to top](#note-angular-17)**
+
 ### Directives: Other
 
 1. **ngSubmit :** Gère l'événement de soumission d'un formulaire.
@@ -391,8 +435,12 @@ Les directives d'attribut écoutent et modifient le comportement d'autres élém
    ```html
    <form (ngSubmit)="onSubmit()"></form>
    ```
-  
+
+**🔝 [back to top](#note-angular-17)**
+
 ## Others
+
+**🔝 [back to top](#note-angular-17)**
 
 ### Types Subject
 
@@ -418,3 +466,41 @@ Les directives d'attribut écoutent et modifient le comportement d'autres élém
 5. **Combinaison de `ReplaySubject` et `AsyncSubject` :**
    - Retient toutes les valeurs émises, mais n'émet la dernière qu'à la complétion.
    - Utile pour conserver l'historique tout en n'émettant qu'une seule valeur à la fin.
+
+----------
+
+Solution pour éviter de copier une array car l'utilisation de l'opérateur de spread ([... ]) pour créer un nouveau tableau peut être coûteuse en termes de performances si le tableau d'origine est très grand. Cela est dû au fait que chaque élément du tableau doit être copié individuellement dans le nouveau tableau.
+
+```ts
+// Service
+export class MyService {
+  _arrayUpdated: BehaviorSubject<number> = new BehaviorSubject(0);
+  _obsArrayUpdated: Observable<number> = this._arrayUpdated.asObservable();
+  _myArray: string[] = ["a", "b"];
+
+  _arraySubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  _obsArraySubject: Observable<string[]> = this._arraySubject.asObservable();
+
+  someMethod() {
+     // utilisation de l'opérateur de spread ([... ]) pour créer un nouveau tableau
+     const newArray = [...this._arraySubject.value, "c", "d"];
+     this._arraySubject.next(newArray);
+ 
+     // Utilisation d'un BehaviorSubject qui stocke un nombre, lequel est incrémenté à chaque modification de l'array.
+     this._myArray.push("c");
+     this._arrayUpdated.next(this._arrayUpdated.value + 1);
+     this._myArray.push("d");
+     this._arrayUpdated.next(this._arrayUpdated.value + 1);
+  }
+}
+
+// Component
+export class ExampleComponent {
+   constructor(private myService: MyService) {
+       myService._obsArrayUpdated.subscribe(() => console.log(myService._myArray));
+       myService._obsArraySubject.subscribe((v) => console.log(v));
+   }
+}
+```
+
+### Ref HTML in Component

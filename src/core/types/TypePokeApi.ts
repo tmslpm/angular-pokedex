@@ -1,41 +1,3 @@
-export function reducePokeApiEndpoint(endpoint: string): string {
-    let endpointSplited = endpoint.split("api/v2/");
-    let endpointWithoutDomain = endpointSplited[endpointSplited.length - 1];
-    let endpointWithoutDomainSplited = endpointWithoutDomain.split("/");
-    let reducedKey;
-    switch (endpointWithoutDomainSplited[0]) {
-        case "pokedex?offset=0&limit=60":
-            reducedKey = "b";
-            break;
-        case "pokemon-species":
-            reducedKey = "s";
-            break;
-        case "pokedex":
-            reducedKey = "x";
-            break;
-        default:
-            console.error(`/!\\ endpoint not reduced =>`, { endpoint: endpoint, lose_octet: endpoint.length * 2 });
-            reducedKey = endpoint;
-            break;
-    }
-    return endpointWithoutDomain.replace(endpointWithoutDomainSplited[0], reducedKey).replaceAll("/", "");
-}
-
-export function pokedexListEndpoint(offset: number, limit: number): string {
-    return `https://pokeapi.co/api/v2/pokedex?offset=${offset}&limit=${limit}`;
-}
-
-export function pokemonSpecieEndpoint(id: number | string): string {
-    return `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
-}
-
-export function pokemonDataEndpoint(id: number | string): string {
-    return `https://pokeapi.co/api/v2/pokemon/${id}/`;
-}
-
-///////////////////////////////////////////////
-///////////////// T Y P E /////////////////////
-
 export interface PokemonData {
     id: number;
     name: string;
@@ -101,8 +63,14 @@ export interface Pokedex {
 
 export interface PokedexParsed {
     id: number,
-    desc: string;
-    name: string;
+    desc: {
+        fr: string,
+        en: string,
+    };
+    name: {
+        fr: string,
+        en: string,
+    };
     pokemon: string[];
 }
 
@@ -143,8 +111,14 @@ export interface PokemonSpecies {
 
 export interface PokemonSpeciesParsed {
     id: number;
-    name: string;
-    desc: string;
+    name: {
+        fr: string,
+        en: string,
+    };
+    desc: {
+        fr: string,
+        en: string,
+    };
     height: number;
     weight: number;
     sprite: string[];

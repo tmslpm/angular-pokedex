@@ -7,16 +7,7 @@ import { NotificationComponent } from "./components/Notification/notification.co
 @Component({
   selector: "app-root",
   standalone: true,
-  template: `
-    <div class="wrapperBodyContent">
-      <menu-component></menu-component>
-      <main class="col-12 padding1">
-        <router-outlet> </router-outlet> 
-      </main> 
-      <footer-component></footer-component>
-      <notification-component></notification-component>
-    </div>
-  `,
+  templateUrl: `./main.component.html`,
   imports: [RouterOutlet, MenuComponent, FooterComponent, NotificationComponent]
 })
 export class MainComponent { }

@@ -857,6 +857,7 @@ hr {
 
                     .btnCircle {
                         background: rgb(80 80 81);
+                        text-align: center;
                         border-radius: 100%;
                         width: 40px;
                         height: 40px;
@@ -1006,26 +1007,19 @@ hr {
                 .pokedexScreen {
                     background: unset !important;
                     transform: rotateY(180deg);
-                    height: 100% !important;
+                    height: 100% !important; 
 
                     .pokedexRightScreenDisplay {
                         height: 28%;
                         width: 100%;
-                        margin: 10px 0;
+                        margin: 10px 0;  
 
-                        .content {
-                            padding: 8px 12px 0 12px;
+                        .content { 
+                            height: 100%; 
+                            margin:4px;
+                            overflow-y: auto;
+                            padding: 8px 12px;
                             line-height: 19px;
-
-                            input,
-                            button {
-                                font-size: 16px;
-                                background-color: transparent;
-                                color: currentColor;
-                                border: 1px solid rgb(145, 212, 148);
-                                border-radius: 4px;
-                                margin-right: 1px;
-                            }
                         }
                     }
 
@@ -1056,7 +1050,7 @@ hr {
             }
         }
 
-        .pokemonList {
+        .pokedexScreenList {
             padding: 5px 4px;
             overflow-y: hidden;
             max-height: 100%;
@@ -1116,6 +1110,17 @@ hr {
             background-size: 100% 0.8em;
             box-shadow: inset 0px 0 2px 1.2px black;
             border-radius: 5px;
+
+
+            ::-webkit-scrollbar-thumb {
+                background: rgba(130, 203, 134, 0.6); 
+                border-radius: 5px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgba(130, 203, 134, 0.8);
+            }
+
         }
 
 

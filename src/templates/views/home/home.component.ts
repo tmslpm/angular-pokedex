@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
+import { Meta } from "@angular/platform-browser";
 
 @Component({
   selector: "app-home",
@@ -10,7 +11,12 @@ import { Component, OnInit } from "@angular/core";
 export class HomeComponent implements OnInit {
   public _pokeApiAvailable: boolean = false;
 
-  public constructor() {
+  public constructor(meta: Meta) {
+    let description = $localize`Angular 17 project created for educational purposes to explore and learn the framework. It presents a functional Pokedex that connects to the pokeapi.co API. Two implementation are provided: one using the Fetch API in JavaScript and the other using Angular HttpClient module. Created by @tmslpm.`
+    meta.updateTag({ name: 'description', content: description });
+    meta.updateTag({ name: 'og:description', content: description });
+    meta.updateTag({ name: 'og:title', content: $localize`Angular-Pokedex - Home Page - by @tmslpm` });
+
     this.tryCallApi();
   }
 
@@ -30,13 +36,9 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  public onAlert(v: any) {
-    alert(v)
-  }
-
   public get pokeApiAvailable(): boolean {
     return this._pokeApiAvailable;
   }
 
-}
 
+}

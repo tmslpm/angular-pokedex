@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
-export class TTSService {
+export class TextToSpeechService {
     private readonly _speak: BehaviorSubject<boolean>;
     private readonly _obsSpeak: Observable<boolean>;
 
@@ -24,7 +24,7 @@ export class TTSService {
     }
 
     public speaks(allParagraph: NodeListOf<HTMLParagraphElement>): boolean {
-        if (!this.enabled)
+        if (!this.isAvailable)
             return false;
 
         let textFound = false;
@@ -88,7 +88,7 @@ export class TTSService {
         return this._obsSpeak;
     }
 
-    public get enabled(): boolean {
+    public get isAvailable(): boolean {
         return this._voice != null;
     }
 

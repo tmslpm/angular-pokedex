@@ -6,9 +6,9 @@ import { Component } from "@angular/core";
   templateUrl: "./switch-lang.component.html", styleUrl: "./switch-lang.component.scss"
 })
 export class LangSwitchComponent {
-  private static LANGs: LangDetails[] = [
-    { locale: "en-US", name: "English" },
-    { locale: "fr-FR", name: "French" }
+  public static LANGs: LangDetails[] = [
+    { locale: "en-US", name: "English", code: "en" },
+    { locale: "fr-FR", name: "French", code: "fr" }
   ];
 
   private readonly _currentLang: LangDetails;
@@ -36,5 +36,6 @@ export class LangSwitchComponent {
 
 export type LangDetails = {
   locale: string,
-  name: string
+  name: string,
+  code: string,
 };

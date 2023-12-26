@@ -1,40 +1,54 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
+/**
+ * ## 1) In the component
+ * 
+ * ```ts
+ * ＠Component({ 
+ *  selector: "app-home",
+ *  standalone: true,
+ *  imports: [CommonModule, ConvertUnitMeasure]
+ * })
+ * export class YourComponent { }
+ * ```
+ * 
+ * ## 2) In the template html
+ * ```html
+ *   <div>{{ 50 | convertUnitMeasure:'kg':'g' }}</div>
+ *   <div>{{ 50 | convertUnitMeasure:'m':'hm' }}</div>
+ *   <div>{{ 50 | convertUnitMeasure:'cm':'m' }}</div>
+ *   <div>{{ 50 | convertUnitMeasure:'g':'kg' }}</div>
+ * ```
+ */
 @Pipe({ name: 'convertUnitMeasure', standalone: true })
 export class ConvertUnitMeasure implements PipeTransform {
     private static readonly UNITS = {
         /* height */
-        mm: { key: 'mm', conversion: 1 },
-        cm: { key: 'cm', conversion: 10 },
-        dm: { key: 'dm', conversion: 100 },
-        m: { key: 'm', conversion: 1000 },
-        dam: { key: 'dam', conversion: 10000 },
-        hm: { key: 'hm', conversion: 100000 },
-        km: { key: 'km', conversion: 1000000 },
+        mm:  1,
+        cm:  10,
+        dm:  100,
+        m:   1000,
+        dam: 10000,
+        hm:  100000,
+        km:  1000000,
         /* weight */
-        mg: { key: 'mg', conversion: 1 },
-        cg: { key: 'cg', conversion: 10 },
-        dg: { key: 'dg', conversion: 100 },
-        g: { key: 'g', conversion: 1000 },
-        dag: { key: 'dag', conversion: 10000 },
-        hg: { key: 'hg', conversion: 100000 },
-        kg: { key: 'kg', conversion: 1000000 },
+        mg:  1,
+        cg:  10,
+        dg:  100,
+        g:   1000,
+        dag: 10000,
+        hg:  100000,
+        kg:  1000000,
     }
 
     public transform(value: number, from: keyof typeof ConvertUnitMeasure.UNITS, to: keyof typeof ConvertUnitMeasure.UNITS): string {
         let tryGetFrom = ConvertUnitMeasure.UNITS[from];
         if (!tryGetFrom)
             throw new Error("Invalid paramater for 'from'")
-
         let tryGetTo = ConvertUnitMeasure.UNITS[to];
         if (!tryGetTo)
             throw new Error("Invalid paramater for 'to'")
-
-        let result = (value * tryGetFrom.conversion) / tryGetTo.conversion;
-
-        console.log(`${value} ${tryGetFrom.key} équivaut à ${result} ${tryGetTo.key}`);
-
-        return `${result} ${tryGetTo.key}`;
+        return `${(value * tryGetFrom) / tryGetTo} ${to}`;
     }
 
 }
