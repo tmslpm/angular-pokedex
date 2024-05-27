@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} - Deploy static content to Pages
 
 # Runs after other action, action: {name: NPM_BUILD}
 on:
-  push:
+  #push:
   workflow_run:
     workflows: ["NPM_BUILD"]
     types:
