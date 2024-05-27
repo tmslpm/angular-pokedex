@@ -2,27 +2,26 @@
 name: NPM_BUILD
 run-name: ${{ github.actor }} - npm build and update main repos
 
-on: [push]
-
+on:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "18.13.0"
-          cache: "npm" 
+          cache: "npm"
       - name: Install NPM dependencies
-        run: npm install 
+        run: npm install
       - name: Run NPM task (like build)
-        run: npm run github_build 
+        run: npm run github_build
       - name: Make Github commit
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
-          git commit -m "update dist after build (github-actions)" 
+          git commit -m "update dist after build (github-actions)"
       - name: Make Github push
         uses: ad-m/github-push-action@master
         with:

@@ -4,6 +4,7 @@ run-name: ${{ github.actor }} - Deploy static content to Pages
 
 # Runs after other action, action: {name: NPM_BUILD}
 on:
+  push:
   workflow_run:
     workflows: ["NPM_BUILD"]
     types:
@@ -40,7 +41,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: 'dist/browser'
+          path: "dist/browser"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
